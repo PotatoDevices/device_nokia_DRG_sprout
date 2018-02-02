@@ -61,6 +61,9 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
+# DRM
+TARGET_ENABLE_MEDIADRM_64 := true
+
 # Graphics
 TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3

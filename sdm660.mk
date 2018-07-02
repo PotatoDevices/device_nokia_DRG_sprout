@@ -60,6 +60,10 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     audio.a2dp.default
 
+# Camera
+PRODUCT_PACKAGES += \
+    Snap
+
 # Init
 PRODUCT_PACKAGES += \
     init.recovery.qcom.rc

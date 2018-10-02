@@ -137,6 +137,10 @@ PRODUCT_PACKAGES += \
     rcs_service_api \
     rcs_service_api.xml
 
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(COMMON_PATH)
+
 # Telephony-ext
 PRODUCT_PACKAGES += \
     telephony-ext

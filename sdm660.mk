@@ -68,6 +68,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.recovery.qcom.rc
 
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(COMMON_PATH)/keylayout/goodix_fp.kl:system/usr/keylayout/goodix_fp.kl
+
 # Net
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0

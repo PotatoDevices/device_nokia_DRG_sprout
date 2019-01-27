@@ -23,9 +23,46 @@ $(call inherit-product, vendor/nokia/sdm660-common/sdm660-common-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(COMMON_PATH)/overlay
 
+# AB update support
+AB_OTA_UPDATER := true
+
+AB_OTA_PARTITIONS += \
+    boot \
+    system
+
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
+
+PRODUCT_PACKAGES += \
+    otapreopt_script
+
+# Boot control
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_verifier
+
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.sdm660 \
+    libcutils \
+    libgptutils \
+    libz \
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default
+
+# Init
+PRODUCT_PACKAGES += \
+    init.recovery.qcom.rc
 
 # Net
 PRODUCT_PACKAGES += \

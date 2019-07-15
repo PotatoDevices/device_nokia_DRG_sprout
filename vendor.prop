@@ -120,6 +120,9 @@ dalvik.vm.heaptargetutilization=0.75
 # Display
 qemu.hw.mainkeys=0
 
+# Charger
+ro.charger.enable_suspend=true
+
 # DRM
 drm.service.enabled=true
 ro.com.widevine.cachesize=16777216

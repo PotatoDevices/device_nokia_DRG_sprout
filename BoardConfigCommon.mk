@@ -47,6 +47,9 @@ TARGET_KERNEL_SOURCE := kernel/nokia/sdm660
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
+
 # Audio
 USE_XML_AUDIO_POLICY_CONF := 1
 

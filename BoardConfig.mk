@@ -103,7 +103,7 @@ BOARD_KERNEL_CMDLINE := \
     console=ttyMSM0,115200,n8 androidboot.console=ttyMSM0 earlycon=msm_serial_dm,0xc170000 androidboot.hardware=qcom \
     msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 \
     service_locator.enable=1 swiotlb=1 androidboot.configfs=true androidboot.usbcontroller=a800000.dwc3 \
-    loop.max_part=16
+    loop.max_part=16 androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_CONFIG := nokia_defconfig
@@ -161,14 +161,14 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 # Telephony
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
+#Sepolicy
+#include device/qcom/sepolicy-legacy-um/SEPolicy.mk
+#BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+#BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+
 # SELinux
-PRIVATE_EXCLUDE_BUILD_TEST := true
-
-# Sepolicy
-include device/qcom/sepolicy-legacy-um/SEPolicy.mk
-
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/minimal_sepolicy
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # Vendor Security Patch Level
 VENDOR_SECURITY_PATCH := 2021-01-01

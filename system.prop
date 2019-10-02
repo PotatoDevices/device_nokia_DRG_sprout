@@ -91,6 +91,7 @@ persist.ims.enableDebugLogs=1
 persist.rcs.supported=0
 
 # IORap
+iorapd.readahead.enable=true
 ro.iorapd.enable=true
 
 # Logging

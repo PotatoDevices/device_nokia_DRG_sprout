@@ -97,3 +97,9 @@ PRODUCT_BOOT_JARS += \
 # Whitelist
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+
+# Wi-Fi
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(COMMON_PATH)/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
+    $(COMMON_PATH)/wifi/hostapd.conf:system/etc/hostapd/hostapd_default.conf

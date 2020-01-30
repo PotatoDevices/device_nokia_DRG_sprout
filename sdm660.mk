@@ -65,9 +65,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.a2dp.default
 
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_policy_configuration.xml
-
 # Boot Control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery \
@@ -129,7 +126,6 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-    init.qcom.rc \
     init.recovery.qcom.rc
 
 # RCS
@@ -162,14 +158,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
-
-# Vendor default.prop
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/vendor_default.prop:$(TARGET_COPY_OUT_SYSTEM)/etc/vendor_default.prop
-
-# Whitelist
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml
 
 # Wi-Fi
 PRODUCT_COPY_FILES += \

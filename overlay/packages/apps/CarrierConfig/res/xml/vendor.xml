@@ -147,6 +147,14 @@
         <string name="wfc_emergency_address_carrier_app_string">com.google.android.wfcactivation/.VzwEmergencyAddressActivity</string>
         <int name="wfc_spn_format_idx_int" value="1" />
     </carrier_config>
+    <carrier_config mcc="404" mnc="49">
+        <boolean name="carrier_volte_available_bool" value="true" />
+        <boolean name="carrier_wfc_ims_available_bool" value="true" />
+    </carrier_config>
+    <carrier_config mcc="404" mnc="97">
+        <boolean name="carrier_volte_available_bool" value="true" />
+        <boolean name="carrier_wfc_ims_available_bool" value="true" />
+    </carrier_config>
     <carrier_config mcc="405" mnc="840">
         <boolean name="carrier_volte_available_bool" value="true" />
         <boolean name="carrier_wfc_ims_available_bool" value="true" />

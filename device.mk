@@ -161,6 +161,10 @@ PRODUCT_PACKAGES += \
     libxml2 \
     Snap
 
+# Charger
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.charger.enable_suspend=true
+
 PRODUCT_PACKAGES += \
     libshim_megvii
 

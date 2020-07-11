@@ -350,7 +350,7 @@
     <ctl name="EAR PA Boost" value="ENABLE" />
     <ctl name="EAR_S" value="ZERO" />
 
-    <ctl name="RX1 Digital Volume" value="84" />
+    <ctl name="RX1 Digital Volume" value="88" />
     <ctl name="RX2 Digital Volume" value="84" />
     <ctl name="RX3 Digital Volume" value="84" />
     <ctl name="RX4 Digital Volume" value="84" />

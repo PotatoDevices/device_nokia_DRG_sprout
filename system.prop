@@ -115,9 +115,6 @@ vidc.enc.target_support_bframe=1
 # NFC
 ro.nfc.port=I2C
 
-# Power
-persist.env.fastdorm.enabled=true
-
 # RIL
 DEVICE_PROVISIONED=1
 net.tethering.noprovisioning=true

@@ -126,7 +126,6 @@ ro.charger.enable_suspend=true
 # DRM
 drm.service.enabled=true
 ro.com.widevine.cachesize=16777216
-persist.env.fastdorm.enabled=true
 persist.gsmapp.ezincall.video=false
 persist.sys.screenmode=1
 persist.vendor.dpm.feature=11

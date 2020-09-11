@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2019 The LineageOS Project
+# Copyright (C) 2020 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,14 +13,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 set -e
 
-DEVICE_COMMON=sdm660-common
-VENDOR=nokia
-
-INITIAL_COPYRIGHT_YEAR=2019
+# Required!
+export DEVICE=DRG_sprout
+export VENDOR=nokia
+export DEVICE_BRINGUP_YEAR=2020
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -34,18 +33,6 @@ if [ ! -f "$HELPER" ]; then
     exit 1
 fi
 . "$HELPER"
-
-# Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$LINEAGE_ROOT" true
-
-# Copyright headers and common guards
-write_headers "DRG PL2"
-
-# The common blobs
-write_makefiles "$MY_DIR"/proprietary-files.txt true
-
-# We are done with common
-write_footers
 
 # Initialize the helper for device
 setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT"

@@ -1,36 +1,28 @@
 on early-boot
-        setprop persist.capture.burst.exposures 0,-9,9
-        #Enable Camera ISP turbo mode for dualcam
-        setprop persist.vendor.camera.isp.turbo 1
-        #Enable QCOM Extend API
-        setprop persist.radio.qcom_ext_enable true
-        #Multiple front flash
-        setprop persist.camera.ffcolor FFBB77
-        setprop persist.camera.ffcolor.lev2 FFE4CA
-        setprop persist.camera.ffcolor.th 3500
-        setprop persist.camera.ffcolor.lev3 ffdcb9
-        setprop persist.camera.ffcolor.th2 4500
-        setprop vendor.voice.path.for.pcm.voip false
-        setprop persist.vendor.audio.fluence.speaker false
-        setprop debug.ftm.mixerpath /vendor/etc/mixer_paths_drg.xml
+    # Audio
+    setprop vendor.voice.path.for.pcm.voip false
+    setprop persist.vendor.audio.fluence.speaker false
+    setprop debug.ftm.mixerpath /vendor/etc/mixer_paths_drg.xml
 
-#DerekCWWu, workaround for DRG
-        setprop camera.ans.yproc.int.main 20,20,20,20
-        setprop camera.ans.uvproc.int.main 20,20,20,20
-        setprop camera.ans.scene.contract.main 0,0,0,0
+    # Camera
+    setprop camera.ans.yproc.int.main 20,20,20,20
+    setprop camera.ans.uvproc.int.main 20,20,20,20
+    setprop camera.ans.scene.contract.main 0,0,0,0
+    setprop persist.camera.ffcolor FFBB77
+    setprop persist.camera.ffcolor.lev2 FFE4CA
+    setprop persist.camera.ffcolor.th 3500
+    setprop persist.camera.ffcolor.lev3 ffdcb9
+    setprop persist.camera.ffcolor.th2 4500
+    setprop persist.capture.burst.exposures 0,-9,9
+    setprop persist.vendor.camera.isp.turbo 1
+    setprop vendor.camera.hal1.packagelist com.dw.btime
 
-#DerekCWWu, WA for DRG whatsAPP video call
-        setprop vendor.camera.hal1.packagelist com.dw.btime,com.whatsapp
+    # Fingerprint
+    setprop ro.hardware.fingerprint gxfp3258_drg
 
-#CPLai disable uicc se for DRG
-        setprop persist.vendor.radio.uicc_se_enabled false
-
-        # Fingerprint
-        setprop ro.hardware.fingerprint gxfp3258_drg
-
-         # Radio
-         setprop persist.radio.qcom_ext_enable true
-         setprop persist.vendor.radio.uicc_se_enabled false
+     # Radio
+     setprop persist.radio.qcom_ext_enable true
+     setprop persist.vendor.radio.uicc_se_enabled false
 
 on fs
     # Fingerprint

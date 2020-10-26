@@ -59,6 +59,10 @@ function blob_fixup() {
     vendor.qti.hardware.data.connection-V1.0-java.xml|vendor.qti.hardware.data.connection-V1.1-java.xml)
         sed -i 's/xml version="2.0"/xml version="1.0"/' "${2}"
         ;;
+    product/lib64/libdpmframework.so)
+        patchelf --replace-needed "libcutils.so" "libcutils-v29.so" "${2}"
+        patchelf --add-needed "libcutils.so" "${2}"
+        ;;
     esac
 }
 

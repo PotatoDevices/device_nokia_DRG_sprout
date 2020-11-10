@@ -159,7 +159,8 @@ PRODUCT_PACKAGES += \
     camera.device@3.2-impl \
     libstdc++.vendor \
     libxml2 \
-    Snap
+    Snap \
+    Camera2
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \

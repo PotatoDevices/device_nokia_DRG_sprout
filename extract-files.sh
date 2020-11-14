@@ -63,6 +63,9 @@ function blob_fixup() {
         patchelf --replace-needed "libcutils.so" "libcutils-v29.so" "${2}"
         patchelf --add-needed "libcutils.so" "${2}"
         ;;
+    vendor/etc/nfcee_access.xml)
+        sed -i 's|xliff="urn:oasis:names:tc:xliff:document:1.2"|android="http://schemas.android.com/apk/res/android"|' "${2}"
+        ;;
     esac
 }
 

@@ -452,6 +452,12 @@ vendor/firmware/cppf.b07
 vendor/firmware/cppf.b01
 vendor/firmware/cppf.mdt
 
+# Fingerprint
+vendor/etc/permissions/qti_fingerprint_interface.xml 
+vendor/lib/vendor.qti.hardware.fingerprint@1.0.so 
+vendor/lib64/libqfp-service.so 
+vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
+
 # FM
 lib/fm_helium.so
 lib/libfm-hci.so
@@ -1374,6 +1380,9 @@ vendor/lib/libmmcamera_s5k5e9_drg_aux_eeprom.so
 
 # Fingerprint (Goodix)
 vendor/lib64/hw/fingerprint.gxfp3258_drg.so
+vendor/lib64/libgf_ca_gxfp3258_drg.so 
+vendor/lib64/libgf_hal_gxfp3258_drg.so 
+vendor/lib64/libvendor.goodix.hardware.fingerprintextension@1.0.so 
 
 # Fingerprint (Firmware - Goodix)
 vendor/firmware/gxfp3258_drg.b00
@@ -1385,6 +1394,14 @@ vendor/firmware/gxfp3258_drg.b05
 vendor/firmware/gxfp3258_drg.b06
 vendor/firmware/gxfp3258_drg.b07
 vendor/firmware/gxfp3258_drg.mdt
+vendor/firmware/goodix_config.cfg 
+vendor/firmware/goodix_config_hlt.cfg 
+vendor/firmware/goodix_config_oflim.cfg 
+vendor/firmware/goodix_config_truly.cfg 
+vendor/firmware/goodix_firmware.bin 
+vendor/firmware/goodix_firmware_hlt.bin 
+vendor/firmware/goodix_firmware_oflim.bin 
+vendor/firmware/goodix_firmware_truly.bin 
 
 # Sensor (Configs)
 vendor/etc/sensors/sensor_def_qcomdev_drg.conf

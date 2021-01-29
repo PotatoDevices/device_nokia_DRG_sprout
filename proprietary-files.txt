@@ -1095,6 +1095,7 @@ vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 
 # WiFi
 vendor/bin/cnss-daemon
+vendor/lib64/libwifi-hal.so
 
 # WiFi Display
 bin/wfdservice

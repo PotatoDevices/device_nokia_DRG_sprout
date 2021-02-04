@@ -1,0 +1,2 @@
+# Block files
+allow fih_partition fih_partition:blk_file { read };

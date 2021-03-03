@@ -177,10 +177,17 @@ ro.vendor.sdk.sensors.gestures=false
 ro.vendor.sensors.cmc=false
 ro.vendor.sensors.facing=false
 
+# SoC
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=SDM660
+
 # Stagefright
 debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
 vendor.video.disable.ubwc=1
+
+# Time
+persist.vendor.delta_time.enable=true
 
 # Wi-Fi
 ro.boot.wificountrycode=US

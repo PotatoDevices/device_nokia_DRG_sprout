@@ -90,6 +90,9 @@ persist.ims.enableADBLogs=1
 persist.ims.enableDebugLogs=1
 persist.rcs.supported=0
 
+# IORap
+ro.iorapd.enable=true
+
 # Logging
 persist.debug.coresight.config=stm-events
 ro.logd.kernel=true

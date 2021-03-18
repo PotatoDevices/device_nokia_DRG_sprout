@@ -1,1 +1,0 @@
-allow sysfs_fingerprint tmpfs:filesystem associate;

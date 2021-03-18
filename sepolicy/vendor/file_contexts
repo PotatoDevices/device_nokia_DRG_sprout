@@ -3,6 +3,9 @@
 /firmware(/.*)?          u:object_r:firmware_file:s0
 /persist(/.*)?           u:object_r:mnt_vendor_file:s0
 
+# Fingerprint
+/dev/goodix_fp u:object_r:fingerprintd_device:s0
+
 # Partitions (A/B)
 /dev/block/platform/soc/c0c4000\.sdhci/by-name/cda_[ab]                        u:object_r:custom_ab_block_device:s0
 /dev/block/platform/soc/c0c4000\.sdhci/by-name/hidden_[ab]                     u:object_r:custom_ab_block_device:s0

@@ -1,6 +1,7 @@
 # FIH Partitions
 type fih_partition, dev_type;
 
+# /proc/devmodel
 type proc_fih, fs_type, proc_type;
 
 # /proc/bandinfo

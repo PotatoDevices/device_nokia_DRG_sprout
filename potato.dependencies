@@ -1,0 +1,13 @@
+[
+  {
+    "repository": "Cesium-Devices/android_kernel_nokia_sdm660",
+    "target_path": "kernel/nokia/sdm660"
+    "branch": "eleven"
+  },
+  {
+	  "repository": "PotatoDevice/vendor_nokia_DRG_sprout"
+	  "target_path": "vendor/nokia/DRG_sprout"
+    "branch": "dumaloo-release"
+
+  }
+]

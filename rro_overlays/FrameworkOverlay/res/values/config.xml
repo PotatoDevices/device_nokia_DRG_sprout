@@ -495,7 +495,7 @@
 
     <string translatable="false" name="config_mainBuiltInDisplayCutout">M178 0c-11.6 0-21.7 11.3-21.7 22.8l0 0.3c-0.5 18.1-8 35.1-21.1 47.7C122.1 83.6 105.5 89 87.2 89H-86.3 c-18.3 0-36.6-6.4-49.7-19.1C-149 58.2 -157 41.2 -157.5 23.1l0-0.3C-157.5 11.3 -166.4 0 -178 0H178z</string>
 
-     <!-- The maximum range of gamma adjustment possible using the screen
+    <!-- The maximum range of gamma adjustment possible using the screen
          auto-brightness adjustment setting. -->
     <fraction name="config_autoBrightnessAdjustmentMaxGamma">299.99695%</fraction>
 

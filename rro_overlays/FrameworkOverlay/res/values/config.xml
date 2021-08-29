@@ -535,4 +535,7 @@
         <item>0:2:15</item>
     </string-array>
 
+    <!-- AOSP WFD -->
+    <bool name="config_enableWifiDisplay">true</bool>
+
 </resources>

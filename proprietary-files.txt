@@ -693,9 +693,11 @@ vendor/firmware/widevine.b07
 vendor/firmware/widevine.mdt
 vendor/lib64/libwvhidl.so
 
-# Display-Hardware
-vendor/lib/libsdmextension.so
-vendor/lib64/libsdmextension.so
+# Display-Hardware - from lavender
+vendor/lib/libsdmextension.so|dd1b0812e134ff75994812732954fa03d7eb4414
+vendor/lib/libsdm-color.so|6dc7253b7c3b950777d0d4ece05db7b45a2d294f
+vendor/lib64/libsdmextension.so|133db0462e62fa331eb622b02528b5cdcc08a446
+vendor/lib64/libsdm-color.so|dc3e17f9858e4578c69fd597b21f0dd4f6f52794
 
 # FM
 lib/fm_helium.so
@@ -902,7 +904,6 @@ vendor/lib/libqseed3.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
-vendor/lib/libsdm-color.so
 vendor/lib/libsdm-diag.so
 vendor/lib/libsdm-disp-vndapis.so
 vendor/lib/libtinyxml2_1.so
@@ -927,7 +928,6 @@ vendor/lib64/libqseed3.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
-vendor/lib64/libsdm-color.so
 vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdm-disp-vndapis.so
 vendor/lib64/libtinyxml2_1.so

@@ -9,7 +9,6 @@ ro.af.client_heap_size_kbyte=7168
 ro.vendor.audio.sdk.fluencetype=fluence
 persist.sys.smartamp=1
 persist.vendor.audio.fluence.voicecall=true
-persist.vendor.audio.fluence.voicerec=false
 persist.vendor.audio.fluence.speaker=true
 
 # Bluetooth
@@ -25,7 +24,6 @@ ro.bluetooth.wipower=true
 vendor.bluetooth.soc=cherokee
 
 # CABL
-ro.qualcomm.cabl=2
 ro.vendor.display.cabl=2
 
 # Camera
@@ -160,7 +158,6 @@ persist.sys.fflag.override.settings_network_and_internet_v2=true
 # Sensors
 ro.qti.sensors.dev_ori=false
 ro.vendor.sensors.dev_ori=false
-ro.vendor.sensors.dev_ori=true
 ro.vendor.sensors.mot_detect=true
 ro.vendor.sensors.pmd=true
 ro.vendor.sensors.sta_detect=true

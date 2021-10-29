@@ -19,9 +19,6 @@ DEVICE_PATH := device/nokia/DRG_sprout
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Setup dalvik vm configs
-$(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
-
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/nokia/DRG_sprout/DRG_sprout-vendor.mk)
 
@@ -29,8 +26,7 @@ $(call inherit-product, vendor/nokia/DRG_sprout/DRG_sprout-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay
 
-PRODUCT_PACKAGES += \
-		NoCutoutOverlay
+PRODUCT_ENFORCE_RRO_TARGETS += *
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -65,9 +61,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
-    frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml
+    frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/permissions/com.evenwell.datacollect.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.evenwell.datacollect.xml \
@@ -92,17 +86,18 @@ PRODUCT_PACKAGES += \
 
 # ANT+
 PRODUCT_PACKAGES += \
-    AntHalService
+    AntHalService \
+    com.dsi.ant.antradio_library
+
+PRODUCT_COPY_FILES += \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl \
-    android.hardware.audio@2.0-service \
+    android.hardware.audio.service \
     android.hardware.audio.effect@5.0-impl \
-    android.hardware.audio.effect@2.0-service \
     android.hardware.soundtrigger@2.2-impl \
-    android.hardware.soundtrigger@2.2-service \
-    audiod \
     audio.a2dp.default \
     audio.primary.sdm660 \
     audio.r_submix.default \
@@ -113,7 +108,9 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
-    tinymix
+    tinymix.vendor \
+    tinyplay.vendor \
+    libtinyxml
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
@@ -124,8 +121,7 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
     $(DEVICE_PATH)/audio/listen_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/listen_platform_info.xml \
     $(DEVICE_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
-    $(DEVICE_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml \
-    $(DEVICE_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml
+    $(DEVICE_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
@@ -134,9 +130,10 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0 \
+	android.hardware.bluetooth@1.0.vendor \
     audio.bluetooth.default \
     android.hardware.bluetooth.audio@2.0-impl \
-    libbt-vendor
+    vendor.qti.hardware.btconfigstore@1.0.vendor
 
 # Boot Control
 PRODUCT_PACKAGES += \
@@ -153,27 +150,23 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.device@3.5 \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service \
-    camera.device@3.2-impl \
-    libstdc++.vendor \
-    libxml2 \
+    android.hardware.camera.provider@2.5 \
     Snap \
-    Camera2
-
-# Charger
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.charger.enable_suspend=true
+    vendor.qti.hardware.camera.device@1.0
 
 PRODUCT_PACKAGES += \
     libshim_megvii
 
 # Component overrides
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
+    $(DEVICE_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
 # Display
 PRODUCT_PACKAGES += \
+	android.frameworks.displayservice@1.0.vendor \
     android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.composer@2.1-impl:64 \
@@ -181,24 +174,19 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
-    copybit.sdm660 \
     gralloc.sdm660 \
     hwcomposer.sdm660 \
     memtrack.sdm660 \
     libdisplayconfig \
-    libgui_vendor \
-    liboverlay \
     libqdMetaData.system \
     libtinyxml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    vendor.display.disable_rotator_downscale=1
-    
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.4-service.clearkey
+    android.hardware.drm@1.4-service.clearkey \
+	android.hardware.drm@1.4.vendor
 
 # DPM
 PRODUCT_PACKAGES += \
@@ -218,6 +206,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libqti_vndfwk_detect \
     libqti_vndfwk_detect.vendor
+
+# GPS
+PRODUCT_PACKAGES += \
+    libwifi-hal-ctrl \
+	android.hardware.gnss@2.1.vendor \
+    libpdmapper.so
 
 # Health
 PRODUCT_PACKAGES += \
@@ -247,9 +241,10 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 # IRQ
-PRODUCT_PACKAGES += \
+PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
     $(DEVICE_PATH)/configs/msm_irqbalance_sdm630.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_sdm630.conf
+
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -257,6 +252,17 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/keylayout/ff_key.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ff_key.kl \
     $(DEVICE_PATH)/keylayout/goodix_fp.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/goodix_fp.kl \
     $(DEVICE_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
+
+#keymaster
+PRODUCT_PACKAGES += \
+	android.hardware.keymaster@1.0.vendor \
+    android.hardware.keymaster@4.0-impl \
+    android.hardware.keymaster@4.0-service
+
+# Keystore
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0.vendor \
+    android.hardware.keymaster@4.0.vendor
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -279,16 +285,23 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
+PRODUCT_PACKAGES += \
+  android.hardware.media.c2@1.1.vendor
+
 # Net
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.0 \
     libandroid_net \
     netutils-wrapper-1.0
 
+# Network
+PRODUCT_PACKAGES += \
+    android.hardware.neuralnetworks@1.3.vendor \
+    android.system.net.netd@1.1.vendor
+
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -307,43 +320,33 @@ PRODUCT_PACKAGES += \
     android.hardware.power-service-qti \
     vendor.qti.hardware.perf@2.0.vendor
 
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
 # Protobuf
-# FIXME: master: compat for libprotobuf
-# See https://android-review.googlesource.com/c/platform/prebuilts/vndk/v28/+/1109518
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
     libprotobuf-cpp-lite-vendorcompat
 
 # QMI
+$(call inherit-product, external/json-c/Android.configure.mk)
 PRODUCT_PACKAGES += \
     libjson
 
 # QTI
-
-# Additional native libraries
-# See https://source.android.com/devices/tech/config/namespaces_libraries
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/telephony_product_privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/telephony_product_privapp-permissions-qti.xml \
     $(DEVICE_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt \
     $(DEVICE_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-qti.xml \
     $(DEVICE_PATH)/configs/qti_whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/qti_whitelist.xml \
 
-# RCS
-PRODUCT_PACKAGES += \
-    com.android.ims.rcsmanager \
-    PresencePolling \
-    RcsService
-
 # Radio
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.4 \
+	 android.hardware.radio@1.4.vendor \
     android.hardware.radio@1.2 \
     android.hardware.radio.config@1.0 \
     android.hardware.secure_element@1.0 \
-    rild \
+	android.hardware.secure_element@1.0.vendor \
+	android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.deprecated@1.0.vendor \
     librmnetctl \
     libprotobuf-cpp-full \
     libxml2
@@ -351,7 +354,6 @@ PRODUCT_PACKAGES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-		init.DRG.target.rc \
     init.msm.usb.configfs.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
@@ -378,8 +380,9 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
-
+    android.hardware.sensors@1.0-service \
+    android.frameworks.sensorservice@1.0.vendor
+	
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf \
     $(DEVICE_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf
@@ -387,8 +390,6 @@ PRODUCT_COPY_FILES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(DEVICE_PATH)
-PRODUCT_BOARD_PLATFORM := sdm660
-PRODUCT_USES_QCOM_HARDWARE := true
 
 # Telephony-ext
 PRODUCT_PACKAGES += \
@@ -402,13 +403,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += \
     telephony-ext
-
-# Thermal
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.qti
-	
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf
 
 # Trust
 PRODUCT_PACKAGES += \
@@ -437,11 +431,6 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
 
-# VNDK
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v29/arm64/arch-arm-armv8-a/shared/vndk-sp/libcutils.so:$(TARGET_COPY_OUT_SYSTEM)/lib/libcutils-v29.so \
-    prebuilts/vndk/v29/arm64/arch-arm64-armv8-a/shared/vndk-sp/libcutils.so:$(TARGET_COPY_OUT_SYSTEM)/lib64/libcutils-v29.so
-
 # Weaver
 PRODUCT_PACKAGES += \
     android.hardware.weaver@1.0
@@ -449,12 +438,10 @@ PRODUCT_PACKAGES += \
 # Wi-Fi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    CarrierConfigOverlay \
-    FrameworkOverlay \
     libwpa_client \
     hostapd \
     TetheringConfigOverlay \
-    SystemUIOverlay \
+    WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
 

@@ -94,9 +94,9 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@5.0-impl \
+    android.hardware.audio@6.0-impl \
     android.hardware.audio.service \
-    android.hardware.audio.effect@5.0-impl \
+    android.hardware.audio.effect@6.0-impl \
     android.hardware.soundtrigger@2.2-impl \
     audio.a2dp.default \
     audio.primary.sdm660 \
@@ -131,7 +131,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0 \
     android.hardware.bluetooth@1.0.vendor \
-    android.hardware.bluetooth@1.1.vendor
+    android.hardware.bluetooth@1.1.vendor \
     audio.bluetooth.default \
     android.hardware.bluetooth.audio@2.0-impl \
     vendor.qti.hardware.btconfigstore@1.0.vendor
@@ -384,7 +384,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service \
     android.frameworks.sensorservice@1.0.vendor
-	
+
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf \
     $(DEVICE_PATH)/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf

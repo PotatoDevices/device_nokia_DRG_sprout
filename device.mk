@@ -375,6 +375,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
+# RRO Overlays
+PRODUCT_PACKAGES += \
+	SystemUIOverlay \
+	FrameworkOverlay \
+	CarrierConfigOverlay
+
+
 # Seccomp
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
@@ -445,7 +452,6 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     TetheringConfigOverlay \
-    WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
 

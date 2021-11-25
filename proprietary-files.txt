@@ -906,6 +906,7 @@ vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libsdm-diag.so
 vendor/lib/libsdm-disp-vndapis.so
+vendor/lib/libtinyxml.so
 vendor/lib/libtinyxml2_1.so
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
@@ -930,6 +931,7 @@ vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
 vendor/lib64/libsdm-diag.so
 vendor/lib64/libsdm-disp-vndapis.so
+vendor/lib64/libtinyxml.so
 vendor/lib64/libtinyxml2_1.so
 
 # Keymaster

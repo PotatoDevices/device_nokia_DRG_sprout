@@ -1,12 +1,12 @@
 [
   {
-    "repository": "kernel_nokia_sdm660",
+    "repository": "ancient-devices/kernel_nokia_sdm660",
     "target_path": "kernel/nokia/sdm660",
-    "branch": "dumaloo-release"
+    "branch": "twelve"
   },
   {
-    "repository": "vendor_nokia_DRG_sprout",
+    "repository": "Sid127/vendor_nokia_DRG_sprout",
     "target_path": "vendor/nokia/DRG_sprout",
-    "branch": "dumaloo-release"
+    "branch": "twelve"
   }
 ]

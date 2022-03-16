@@ -16,17 +16,265 @@
 
 DEVICE_PATH := device/nokia/DRG_sprout
 
-# Enable updating of APEXes
+# A/B Partition Scheme
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
+
+PRODUCT_PACKAGES += \
+    otapreopt_script \
+    cppreopts.sh
+
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# AID/fs configs
+PRODUCT_PACKAGES += \
+    fs_config_files
+
+# ANT+
+PRODUCT_PACKAGES += \
+    AntHalService \
+    com.dsi.ant.antradio_library
+
+PRODUCT_COPY_FILES += \
+    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
+
+# APEX
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Get non-open-source specific aspects
-$(call inherit-product, vendor/nokia/DRG_sprout/DRG_sprout-vendor.mk)
+# Audio
+PRODUCT_PACKAGES += \
+    android.hardware.audio@5.0-impl \
+    android.hardware.audio.service \
+    android.hardware.audio.effect@5.0-impl \
+    android.hardware.soundtrigger@2.2-impl \
+    audio.a2dp.default \
+    audio.primary.sdm660 \
+    audio.r_submix.default \
+    audio.usb.default \
+    libaacwrapper \
+    libaudio-resampler \
+    libqcompostprocbundle \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libvolumelistener \
+    tinymix.vendor \
+    tinyplay.vendor \
+    libtinyxml
+
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(DEVICE_PATH)/configs/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
+    $(DEVICE_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(DEVICE_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
+    $(DEVICE_PATH)/configs/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+    $(DEVICE_PATH)/configs/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
+    $(DEVICE_PATH)/configs/audio/listen_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/listen_platform_info.xml \
+    $(DEVICE_PATH)/configs/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
+    $(DEVICE_PATH)/configs/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0 \
+    android.hardware.bluetooth@1.0.vendor \
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio@2.0-impl \
+    vendor.qti.hardware.btconfigstore@1.0.vendor
+
+# Boot Control
+PRODUCT_PACKAGES += \
+    bootctrl.sdm660 \
+    bootctrl.sdm660.recovery
+
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-impl.recovery \
+    android.hardware.boot@1.0-service
+
+PRODUCT_PACKAGES_DEBUG += \
+    bootctl
+
+# Bootanimation
+TARGET_SCREEN_HEIGHT := 2160
+TARGET_SCREEN_WIDTH := 1080
+
+# Camera
+PRODUCT_PACKAGES += \
+    Snap \
+    libshim_megvii
+
+PRODUCT_PACKAGES += \
+    android.hardware.camera.device@3.5 \
+    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-service \
+    android.hardware.camera.provider@2.5 \
+    vendor.qti.hardware.camera.device@1.0
+
+# Component overrides
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
+
+# Display
+PRODUCT_PACKAGES += \
+    android.frameworks.displayservice@1.0.vendor \
+    android.hardware.graphics.allocator@2.0-impl:64 \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl:64 \
+    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service \
+    gralloc.sdm660 \
+    hwcomposer.sdm660 \
+    memtrack.sdm660 \
+    libdisplayconfig \
+    libqdMetaData.system \
+    libtinyxml
+
+# DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service \
+    android.hardware.drm@1.4-service.clearkey \
+    android.hardware.drm@1.4.vendor
+
+# DPM
+PRODUCT_PACKAGES += \
+    libshim_dpmframework
+
+# Fingerprint
+PRODUCT_PACKAGES += \
+    android.hardware.biometrics.fingerprint@2.1-service
+
+# FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    libqcomfm_jni \
+    qcom.fmradio
+
+# GPS
+PRODUCT_PACKAGES += \
+    libwifi-hal-ctrl \
+    libpdmapper.so
+
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@2.1.vendor \
+
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
+
+# HIDL
+PRODUCT_PACKAGES += \
+    libhidltransport \
+    libhidltransport.vendor \
+    libhwbinder \
+    libhwbinder.vendor
+
+PRODUCT_PACKAGES += \
+    android.hidl.base@1.0 \
+    android.hidl.base@1.0_system \
+    android.hidl.manager@1.0 \
+    android.hidl.manager@1.0_system \
+
+# IPACM
+PRODUCT_PACKAGES += \
+    ipacm \
+    IPACM_cfg.xml \
+    libipanat \
+    liboffloadhal
+
+# IRSC
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
+
+# IRQ
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
+    $(DEVICE_PATH)/configs/msm_irqbalance_sdm630.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_sdm630.conf
+
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/keylayout/elan.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/elan.kl \
+    $(DEVICE_PATH)/configs/keylayout/ff_key.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ff_key.kl \
+    $(DEVICE_PATH)/configs/keylayout/goodix_fp.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/goodix_fp.kl \
+    $(DEVICE_PATH)/configs/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
+
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@1.0.vendor \
+    android.hardware.keymaster@4.0-impl \
+    android.hardware.keymaster@4.0-service
+
+# Keystore
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0.vendor \
+    android.hardware.keymaster@4.0.vendor
+
+# Lights
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service \
+    lights.sdm660
+
+# Media
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2@1.1.vendor
+
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    $(DEVICE_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(DEVICE_PATH)/configs/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
+
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
+
+# Net
+PRODUCT_PACKAGES += \
+    libandroid_net \
+    netutils-wrapper-1.0
+
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0 \
+    android.system.net.netd@1.1.vendor
+
+# Neural networks
+PRODUCT_PACKAGES += \
+    android.hardware.neuralnetworks@1.3.vendor \
+    android.system.net.netd@1.1.vendor
+
+# OMX
+PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxCore \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVenc \
+    libstagefrighthw
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay
 
 PRODUCT_ENFORCE_RRO_TARGETS += *
+
+# Perf
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -64,257 +312,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/permissions/com.evenwell.datacollect.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.evenwell.datacollect.xml \
-    $(DEVICE_PATH)/permissions/com.fihtdc.datacollect.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.datacollect.xml \
-    $(DEVICE_PATH)/permissions/com.fihtdc.hardware.sensor.hall.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.hardware.sensor.hall.xml \
-    $(DEVICE_PATH)/permissions/com.fihtdc.inlifeui.settings.style.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.inlifeui.settings.style.android.xml
-
-# A/B Partition Scheme
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_system=true \
-    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
-    FILESYSTEM_TYPE_system=ext4 \
-    POSTINSTALL_OPTIONAL_system=true
-
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh
-
-# AID/fs configs
-PRODUCT_PACKAGES += \
-    fs_config_files
-
-# ANT+
-PRODUCT_PACKAGES += \
-    AntHalService \
-    com.dsi.ant.antradio_library
-
-PRODUCT_COPY_FILES += \
-    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.dsi.ant.antradio_library.xml
-
-# Audio
-PRODUCT_PACKAGES += \
-    android.hardware.audio@6.0-impl \
-    android.hardware.audio.service \
-    android.hardware.audio.effect@6.0-impl \
-    android.hardware.soundtrigger@2.2-impl \
-    audio.a2dp.default \
-    audio.primary.sdm660 \
-    audio.r_submix.default \
-    audio.usb.default \
-    libaacwrapper \
-    libaudio-resampler \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libvolumelistener \
-    tinymix.vendor \
-    tinyplay.vendor
-
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(DEVICE_PATH)/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
-    $(DEVICE_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-    $(DEVICE_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/audio_policy_configuration.xml \
-    $(DEVICE_PATH)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    $(DEVICE_PATH)/audio/audio_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/audio_tuning_mixer.txt \
-    $(DEVICE_PATH)/audio/listen_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/listen_platform_info.xml \
-    $(DEVICE_PATH)/audio/sound_trigger_mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths.xml \
-    $(DEVICE_PATH)/audio/sound_trigger_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_platform_info.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-    frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
-
-# Bluetooth
-PRODUCT_PACKAGES += \
-    android.hardware.bluetooth@1.0 \
-    android.hardware.bluetooth@1.0.vendor \
-    android.hardware.bluetooth@1.1.vendor \
-    audio.bluetooth.default \
-    android.hardware.bluetooth.audio@2.0-impl \
-    vendor.qti.hardware.btconfigstore@1.0.vendor
-
-
-# Boot Control
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl.recovery \
-    bootctrl.sdm660 \
-    bootctrl.sdm660.recovery
-
-PRODUCT_PACKAGES_DEBUG += \
-    bootctl
-
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
-
-# Camera
-PRODUCT_PACKAGES += \
-    android.hardware.camera.device@3.5 \
-    android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service \
-    android.hardware.camera.provider@2.5 \
-    Snap \
-    vendor.qti.hardware.camera.device@1.0
-
-PRODUCT_PACKAGES += \
-    libshim_megvii
-
-# Component overrides
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
-
-# Display
-PRODUCT_PACKAGES += \
-	android.frameworks.displayservice@1.0.vendor \
-    android.hardware.graphics.allocator@2.0-impl:64 \
-    android.hardware.graphics.allocator@2.0-service \
-    android.hardware.graphics.composer@2.1-impl:64 \
-    android.hardware.graphics.composer@2.1-service \
-    android.hardware.graphics.mapper@2.0-impl \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-    gralloc.sdm660 \
-    hwcomposer.sdm660 \
-    memtrack.sdm660 \
-    libdisplayconfig \
-    libqdMetaData.system \
-    libtinyxml
-
-# DRM
-PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
-    android.hardware.drm@1.0-service \
-    android.hardware.drm@1.4-service.clearkey \
-	android.hardware.drm@1.4.vendor
-
-# DPM
-PRODUCT_PACKAGES += \
-    libshim_dpmframework
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service
-
-# FM
-PRODUCT_PACKAGES += \
-    FM2 \
-    libqcomfm_jni \
-    qcom.fmradio
-
-# Framework Detect
-PRODUCT_PACKAGES += \
-    libqti_vndfwk_detect \
-    libqti_vndfwk_detect.vendor
-
-# GPS
-PRODUCT_PACKAGES += \
-    libwifi-hal-ctrl \
-	android.hardware.gnss@2.1.vendor \
-    libpdmapper.so
-
-# Health
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.1-impl \
-    android.hardware.health@2.1-service
-
-# HIDL
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.base@1.0_system \
-    android.hidl.manager@1.0 \
-    android.hidl.manager@1.0_system \
-    libhidltransport \
-    libhidltransport.vendor \
-    libhwbinder \
-    libhwbinder.vendor
-
-# IPACM
-PRODUCT_PACKAGES += \
-    ipacm \
-    IPACM_cfg.xml \
-    libipanat \
-    liboffloadhal
-
-# IRSC
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
-
-# IRQ
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
-    $(DEVICE_PATH)/configs/msm_irqbalance_sdm630.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance_sdm630.conf
-
-
-# Keylayout
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/keylayout/elan.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/elan.kl \
-    $(DEVICE_PATH)/keylayout/ff_key.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ff_key.kl \
-    $(DEVICE_PATH)/keylayout/goodix_fp.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/goodix_fp.kl \
-    $(DEVICE_PATH)/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl
-
-#keymaster
-PRODUCT_PACKAGES += \
-	android.hardware.keymaster@1.0.vendor \
-    android.hardware.keymaster@4.0-impl \
-    android.hardware.keymaster@4.0-service
-
-# Keystore
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor \
-    android.hardware.keymaster@4.0.vendor
-
-# Lights
-PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-impl \
-    android.hardware.light@2.0-service \
-    lights.sdm660
-
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sdm
-
-# Media
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    $(DEVICE_PATH)/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    $(DEVICE_PATH)/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml
-
-PRODUCT_COPY_FILES += \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
-
-PRODUCT_PACKAGES += \
-  android.hardware.media.c2@1.1.vendor
-
-# Net
-PRODUCT_PACKAGES += \
-    android.system.net.netd@1.0 \
-    libandroid_net \
-    netutils-wrapper-1.0
-
-# Network
-PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.3.vendor \
-    android.system.net.netd@1.1.vendor
-
-# OMX
-PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libOmxVdec \
-    libOmxVenc \
-    libstagefrighthw
-
-# Perf
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/perf-profile0.conf:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perf-profile0.conf
+    $(DEVICE_PATH)/configs/permissions/com.evenwell.datacollect.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.evenwell.datacollect.xml \
+    $(DEVICE_PATH)/configs/permissions/com.fihtdc.datacollect.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.datacollect.xml \
+    $(DEVICE_PATH)/configs/permissions/com.fihtdc.hardware.sensor.hall.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.hardware.sensor.hall.xml \
+    $(DEVICE_PATH)/configs/permissions/com.fihtdc.inlifeui.settings.style.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.fihtdc.inlifeui.settings.style.android.xml
 
 # Power
 PRODUCT_PACKAGES += \
@@ -328,8 +329,11 @@ PRODUCT_PACKAGES += \
 
 # QMI
 $(call inherit-product, external/json-c/Android.configure.mk)
+
 PRODUCT_PACKAGES += \
-    libjson
+    libjson \
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor
 
 # QTI
 PRODUCT_COPY_FILES += \
@@ -340,21 +344,23 @@ PRODUCT_COPY_FILES += \
 
 # Radio
 PRODUCT_PACKAGES += \
+    libprotobuf-cpp-full \
+    librmnetctl \
+    libwpa_client \
+    libxml2
+
+PRODUCT_PACKAGES += \
     android.hardware.radio@1.4 \
-	 android.hardware.radio@1.4.vendor \
+    android.hardware.radio@1.4.vendor \
     android.hardware.radio@1.2 \
     android.hardware.radio.config@1.0 \
-    android.hardware.secure_element@1.0 \
-	android.hardware.secure_element@1.0.vendor \
-	android.hardware.radio.config@1.2.vendor \
+    android.hardware.radio.config@1.2.vendor \
     android.hardware.radio.deprecated@1.0.vendor \
-    librmnetctl \
-    libprotobuf-cpp-full \
-    libxml2
 
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    init.DRG.target.rc \
     init.msm.usb.configfs.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
@@ -374,16 +380,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
 
-# RRO Overlays
-PRODUCT_PACKAGES += \
-	SystemUIOverlay \
-	FrameworkOverlay \
-	CarrierConfigOverlay
-
-
 # Seccomp
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+    $(DEVICE_PATH)/configs/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
+
+# Secure element
+PRODUCT_PACKAGES += \
+    android.hardware.secure_element@1.0 \
+    android.hardware.secure_element@1.0.vendor \
+
+# Shipping API
+PRODUCT_SHIPPING_API_LEVEL := 27
+
+# SoC
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.soc.manufacturer=QTI \
+    ro.soc.model=SDM660
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -414,10 +426,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     telephony-ext
 
-# Trust
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
-
 # Update engine
 PRODUCT_PACKAGES += \
     update_engine \
@@ -432,9 +440,13 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
 # Verity
+$(call inherit-product, build/target/product/verity.mk)
+
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/c0c4000.sdhci/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/c0c4000.sdhci/by-name/vendor
-$(call inherit-product, build/target/product/verity.mk)
+
+# Vendor blobs
+$(call inherit-product, vendor/nokia/DRG_sprout/DRG_sprout-vendor.mk)
 
 # Vibrator
 PRODUCT_PACKAGES += \
@@ -451,10 +463,11 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     TetheringConfigOverlay \
+    WifiOverlay \
     wpa_supplicant \
     wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
-    $(DEVICE_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
-    $(DEVICE_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
+    $(DEVICE_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(DEVICE_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
+    $(DEVICE_PATH)/configs/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini

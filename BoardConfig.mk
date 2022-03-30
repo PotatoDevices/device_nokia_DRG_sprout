@@ -181,7 +181,7 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_SCREEN_DENSITY := 420
 
 # Security patch level
-VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+VENDOR_SECURITY_PATCH := 2020-05-01
 
 # SELinux
 #include device/qcom/sepolicy-legacy-um/SEPolicy.mk

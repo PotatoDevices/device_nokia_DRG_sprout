@@ -1,8 +1,8 @@
 [
   {
-    "repository": "ancient-devices/kernel_nokia_sdm660",
+    "repository": "kernel_nokia_sdm660",
     "target_path": "kernel/nokia/sdm660",
-    "branch": "twelve"
+    "branch": "frico_mr1-release"
   },
   {
     "repository": "Sid127/vendor_nokia_DRG_sprout",

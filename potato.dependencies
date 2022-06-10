@@ -1,8 +1,8 @@
 [
   {
-    "repository": "kernel_nokia_sdm660",
+    "repository": "LineageOS/android_kernel_nokia_sdm660",
     "target_path": "kernel/nokia/sdm660",
-    "branch": "frico_mr1-release"
+    "branch": "lineage-19.1"
   },
   {
     "repository": "Sid127/vendor_nokia_DRG_sprout",
